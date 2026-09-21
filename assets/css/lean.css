@@ -238,18 +238,17 @@ html.js .mosaic.in .tile{ opacity:1; transform:none }
 .cmp .rows li .c svg{ width:20px; height:20px; fill:none; stroke:var(--acc); stroke-width:2.2 }
 .cmp .rows li .c.pro{ background:color-mix(in oklab, var(--acc) 6%, transparent) }
 .cmp .rows li.txt .c{ font-family:var(--display); font-weight:500; font-size:15px; color:var(--ink); letter-spacing:-.01em } .cmp .rows li.txt .c.pro{ color:var(--acc) }
-/* extras do Pro: linha em destaque, check com brilho */
+/* extras do Pro: sem moldura — só um halo suave atrás do check */
 .cmp .rows li.plus span{ color:var(--ink) }
-.cmp .rows li.plus .c.pro{ background:linear-gradient(90deg, color-mix(in oklab, var(--acc) 10%, transparent), color-mix(in oklab, var(--acc) 26%, transparent)); box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--acc) 45%, transparent) }
-.cmp .rows li.plus .c.pro svg{ width:23px; height:23px; stroke-width:2.6; filter:drop-shadow(0 0 5px var(--acc)) drop-shadow(0 0 12px color-mix(in oklab, var(--acc) 60%, transparent)) }
-.cmp .rows li.plus .c.pro::after{ content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(60% 120% at 50% 50%, color-mix(in oklab, var(--acc) 22%, transparent), transparent 70%); animation:glowRow 3.4s ease-in-out infinite }
-.cmp .rows li .c{ position:relative }
-@keyframes glowRow{ 0%,100%{ opacity:.35 } 50%{ opacity:1 } }
-.cmp .rows li.plus + li.plus{ border-top-color:color-mix(in oklab, var(--acc) 30%, var(--line2)) }
+.cmp .rows li.plus .c.pro{ background:color-mix(in oklab, var(--acc) 10%, transparent) }
+.cmp .rows li.plus .c.pro svg{ width:21px; height:21px; stroke-width:2.6; filter:drop-shadow(0 0 5px color-mix(in oklab, var(--acc) 85%, transparent)) }
+.cmp .rows li.plus .c.pro::after{ content:""; position:absolute; left:50%; top:50%; width:92px; height:92px; transform:translate(-50%,-50%); border-radius:50%; pointer-events:none; background:radial-gradient(circle, color-mix(in oklab, var(--acc) 34%, transparent), transparent 62%); animation:glowRow 3.4s ease-in-out infinite }
+.cmp .rows li .c{ position:relative; overflow:hidden }
+@keyframes glowRow{ 0%,100%{ opacity:.45 } 50%{ opacity:1 } }
 .cmp .rows li:first-of-type{ border-top:1px solid var(--line) }
 /* a coluna Pro segue as bordas arredondadas do cartão */
 .cmp .hd .tier.pro{ border-top-right-radius:calc(var(--r-lg) - 1px) } .cmp .hd .tier.pro::before{ border-top-right-radius:inherit }
-.cmp .rows li:last-child .c.pro{ border-bottom-right-radius:calc(var(--r-lg) - 1px) } .cmp .rows li:last-child .c.pro::after{ border-bottom-right-radius:inherit }
+.cmp .rows li:last-child .c.pro{ border-bottom-right-radius:calc(var(--r-lg) - 1px) }
 .cmp .rows li:last-child{ border-bottom-left-radius:calc(var(--r-lg) - 1px) }
 .duo .note{ margin-top:22px; font-size:14px; color:var(--dim); text-align:center; max-width:60ch }
 @media (prefers-reduced-motion:reduce){ .cmp .rows li.plus .c.pro::after{ animation:none } }
