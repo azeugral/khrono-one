@@ -115,6 +115,8 @@ layout = read(os.path.join(HERE, "src", "layout.html"))
 agenda = read(os.path.join(HERE, "src", "agenda.html"))
 
 HOME = ""
+import time; STAMP = time.strftime("%Y%m%d%H%M")
+def stamp(html): return re.sub(r'(assets/(?:css|js)/[\w.-]+\.(?:css|js))"', lambda m: m.group(1) + "?v=" + STAMP + '"', html)
 def fill(s, lang):
     L = LANGS[lang]; t = T[lang]; s = s.replace("{{home}}", HOME)
     s = s.replace("{{dash}}", dash).replace("{{plans}}", plans).replace("{{agenda}}", agenda).replace("{{mosaic}}", mosaic[lang])
@@ -137,7 +139,7 @@ for lang in LANGS:
     html = fill(html, lang)
     html = html.replace('href="criar-conta.html"', 'href="#comecar"').replace('href="precos.html"', 'href="#planos"').replace('href="sign-up.html"', 'href="#comecar"').replace('href="pricing.html"', 'href="#planos"')
     assert "[[" not in html and "{{" not in html, re.findall(r"(\[\[[^\]]+\]\]|\{\{[^}]+\}\})", html)[:5]
-    write(os.path.join(HERE, L["dir"], "index.html"), html)
+    write(os.path.join(HERE, L["dir"], "index.html"), stamp(html))
 
 # ---------- assets: os do base-lean + os desta página ----------
 dst = os.path.join(HERE, "assets")
