@@ -139,22 +139,6 @@ for lang in LANGS:
     assert "[[" not in html and "{{" not in html, re.findall(r"(\[\[[^\]]+\]\]|\{\{[^}]+\}\})", html)[:5]
     write(os.path.join(HERE, L["dir"], "index.html"), html)
 
-# ---------- páginas legais (mesmo texto do base-lean), com o header desta one-page ----------
-HOME = "index.html"
-for lang in LANGS:
-    L = LANGS[lang]
-    for key in ("terms", "privacy"):
-        raw = read(os.path.join(BSRC, "pages", lang, L["pages"][key]))
-        m = re.match(r"title:[ \t]*([^\n]*)\ndesc:[ \t]*([^\n]*)\nalt:[ \t]*([^\n]*)\n\n(.*)", raw, re.S)
-        body = m.group(4).replace('href="index.html"', 'href="index.html"').replace('href="precos.html"', 'href="index.html#planos"').replace('href="pricing.html"', 'href="index.html#planos"')
-        html = (layout.replace("{{title}}", m.group(1)).replace("{{desc}}", m.group(2)).replace("{{main}}", body)
-                      .replace("{{lang}}", "pt-BR" if lang == "pt" else "en").replace("{{alt_lang}}", "en" if lang == "pt" else "pt-BR")
-                      .replace("{{alt}}", m.group(3)))
-        html = fill(html, lang)
-        assert "[[" not in html and "{{" not in html, "tokens sobrando em " + L["pages"][key]
-        write(os.path.join(HERE, L["dir"], L["pages"][key]), html)
-HOME = ""
-
 # ---------- assets: os do base-lean + os desta página ----------
 dst = os.path.join(HERE, "assets")
 for sub in ("css", "js", "img"):
