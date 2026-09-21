@@ -15,11 +15,13 @@ def write(p, s):
 _b = read(os.path.join(BASE, "build.py")); _ns = {"__file__": os.path.join(BASE, "build.py")}
 exec(_b[:_b.index("layout = read(")], _ns)
 LANGS, MARCA, DOMINIO, OK = _ns["LANGS"], _ns["MARCA"], _ns["DOMINIO"], _ns["OK"]
+LANGS["pt"]["s"].update({"plan.ess.m":"Cobrado mensalmente", "plan.pro.m":"Cobrado mensalmente", "plan.note":"Os dois planos com 7 dias grátis. Anual = 10 mensalidades, 12 meses de acesso. Preços em reais, com impostos."})
+LANGS["en"]["s"].update({"plan.ess.m":"Billed monthly", "plan.pro.m":"Billed monthly", "plan.note":"Both plans come with 7 days free. Yearly = 10 monthly payments, 12 months of access. Prices in BRL, taxes included."})
 
 T = {
  "pt": dict(
   title="Khrono — agendamento online para o seu negócio", desc="Seu cliente escolhe o horário pelo link. Você organiza a agenda, acompanha a equipe e mantém seus clientes por perto. Para barbearias, salões e clínicas de estética. 7 dias grátis.",
-  nav_seg="Segmentos", nav_feat="Funcionalidades", nav_in="Por dentro", nav_plans="Planos", nav_signin="Entrar", nav_start="Começar grátis", url_signin="https://khrono.tech/workspace",
+  nav_seg="Segmentos", nav_feat="Funcionalidades", nav_in="Por dentro", nav_plans="Planos", nav_signin="Entrar", nav_start="Começar grátis", url_signin="https://khrono.tech/workspace", url_start="https://khrono.tech/workspace",
   hero_eye="Seu negócio tem o seu tempo", hero_h1a="Menos mensagens.", hero_h1b="Mais tempo para atender.",
   hero_lead="Seu cliente escolhe o horário pelo link. Você organiza a agenda, acompanha a equipe e mantém seus clientes por perto.",
   hero_cta1="Começar grátis", hero_cta2="Conhecer o Khrono", hero_note="7 dias para experimentar · a partir de R$ 59,90/mês",
@@ -39,19 +41,19 @@ T = {
   ag_title="Sua agenda", ag_date="Segunda-feira, 21 de setembro", ag_day="Dia", ag_week="Semana", ag_ok="Confirmado", ag_free="Horário livre", ag_new="Novo agendamento", ag_wait="Aguardando",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
   ag_s1="Corte e finalização", ag_c1="Marina", ag_s2="Consulta estética", ag_c2="Lucas", ag_s3="Corte e barba", ag_c3="Beatriz", ag_s4="Escova", ag_c4="Helena", ag_s5="Limpeza de pele", ag_c5="Rafael",
-  st_eye="Como começar", st_h2="Sua próxima agenda começa aqui.", st_lead="Sete dias grátis, sem cartão. Em vinte minutos o link está no ar.",
-  st1_h="Crie sua conta", st1_p="Nome, e-mail e o nome do negócio. Os 7 dias grátis começam na hora.",
+  st_eye="Como começar", st_h2="Sua próxima agenda começa aqui.", st_lead="Em vinte minutos o link está no ar.",
+  st1_h="Crie sua conta", st1_p="Nome, e-mail e o nome do negócio. Seus 7 dias de teste começam na hora.",
   st2_h="Organize seu negócio", st2_p="Cadastre os serviços, a equipe e os horários disponíveis para atendimento.",
   st3_h="Compartilhe seu link", st3_p="Coloque o agendamento na bio, envie aos clientes e acompanhe sua agenda.",
   f_h="Comece agora", f_p="Sem cartão, sem fidelidade. Cancela pelo painel.", f_nome="Seu nome", f_nome_ph="Como quer ser chamado", f_nome_err="Informe seu nome.",
   f_neg="Nome do negócio", f_neg_ph="Ex.: Studio Luma", f_neg_err="Informe o nome do negócio.", f_email="E-mail", f_email_ph="voce@seunegocio.com.br", f_email_err="Informe um e-mail válido.",
   f_seg="Segmento", f_seg1="Barbearia", f_seg2="Salão de beleza", f_seg3="Clínica de estética", f_seg4="Outro", f_btn="Criar conta grátis", f_fine="7 dias grátis · sem cartão · sem fidelidade",
-  pl_eye="Planos", pl_h2="O plano certo para o seu momento.", pl_lead="Comece com o essencial no Básico ou amplie a gestão com o Pro. Nos dois, 7 dias grátis.",
+  pl_eye="Planos", pl_h2="O plano certo para o seu momento.", pl_lead="Comece com o essencial no Básico ou amplie a gestão com o Pro. Experimente por 7 dias grátis.",
   fq_eye="Dúvidas frequentes", fq_h2="Antes de começar.",
   q1="Qual é a diferença entre Básico e Pro?", a1="O Básico atende 1 empresa e inclui catálogo de serviços, gestão de clientes, gestão da equipe, agenda e agendamento público. O Pro atende até 3 empresas e acrescenta financeiro e pagamentos, equipe e permissões e programa de fidelidade.",
   q2="Meu cliente precisa criar uma conta?", a2="Não. Ele agenda pelo link do negócio sem criar conta. O Khrono também oferece uma área do cliente para acompanhar agendamentos e, no plano Pro, a fidelidade.",
   q3="Posso usar no celular?", a3="Sim. O Khrono funciona pelo navegador e se adapta ao celular e ao computador, sem precisar instalar aplicativo.",
-  q4="Como começo os 7 dias grátis?", a4="Clique em “Começar grátis”, crie a conta com nome, e-mail e o nome do negócio. Não pede cartão. Se quiser continuar depois dos sete dias, você escolhe o plano pelo painel.",
+  q4="Como começo os 7 dias grátis?", a4="Clique em “Começar grátis” e crie a conta com nome, e-mail e o nome do negócio. Se quiser continuar depois dos sete dias, você escolhe o plano pelo painel.",
   q5="Já tenho uma conta. Onde entro?", a5="Em “Entrar”, no topo da página. Seus clientes continuam usando o link de agendamento do seu negócio e a área do cliente.",
   cta_h="Seu tempo merece uma agenda melhor.", cta_p="Experimente o Khrono e encontre mais espaço para fazer o que você faz bem.", cta_btn="Começar grátis",
   ft_tag1="Gestão de agendamentos.", ft_tag2="Organize sua agenda e acompanhe seus atendimentos em um só lugar.", ft_plat="Plataforma", ft_l0="Conhecer o Khrono", ft_l6="Acessar meu painel", ft_l5="Área do cliente", ft_l4="Entrar", ft_dev="Desenvolvimento e contato", ft_dev_p="Contato da desenvolvedora", ft_by="Desenvolvido por",
@@ -59,7 +61,7 @@ T = {
  ),
  "en": dict(
   title="Khrono — online booking for your business", desc="Clients pick a time through your link. You run the calendar, follow the team and keep clients close. For barbershops, salons and aesthetic clinics. 7 days free.",
-  nav_seg="Segments", nav_feat="Features", nav_in="Inside", nav_plans="Plans", nav_signin="Sign in", nav_start="Start free", url_signin="https://khrono.tech/workspace",
+  nav_seg="Segments", nav_feat="Features", nav_in="Inside", nav_plans="Plans", nav_signin="Sign in", nav_start="Start free", url_signin="https://khrono.tech/workspace", url_start="https://khrono.tech/workspace",
   hero_eye="Your business runs on your time", hero_h1a="Fewer messages.", hero_h1b="More time to serve.",
   hero_lead="Clients pick a time through your link. You run the calendar, follow the team and keep your clients close.",
   hero_cta1="Start free", hero_cta2="See how it works", hero_note="7 days to try it · from R$ 59.90/month",
@@ -79,8 +81,8 @@ T = {
   ag_title="Your calendar", ag_date="Monday, 21 September", ag_day="Day", ag_week="Week", ag_ok="Confirmed", ag_free="Free slot", ag_new="New booking", ag_wait="Pending",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
   ag_s1="Cut and finish", ag_c1="Marina", ag_s2="Aesthetic consult", ag_c2="Lucas", ag_s3="Cut and beard", ag_c3="Beatriz", ag_s4="Blow-dry", ag_c4="Helena", ag_s5="Facial cleansing", ag_c5="Rafael",
-  st_eye="How to start", st_h2="Your next calendar starts here.", st_lead="Seven days free, no card. Your link is live in twenty minutes.",
-  st1_h="Create your account", st1_p="Name, e-mail and the business name. The 7 free days start right away.",
+  st_eye="How to start", st_h2="Your next calendar starts here.", st_lead="Your link is live in twenty minutes.",
+  st1_h="Create your account", st1_p="Name, e-mail and the business name. Your 7-day trial starts right away.",
   st2_h="Set up your business", st2_p="Add services, the team and the hours available for appointments.",
   st3_h="Share your link", st3_p="Put booking in your bio, send it to clients and follow your calendar.",
   f_h="Start now", f_p="No card, no lock-in. Cancel from the dashboard.", f_nome="Your name", f_nome_ph="What should we call you", f_nome_err="Enter your name.",
@@ -91,7 +93,7 @@ T = {
   q1="What is the difference between Basic and Pro?", a1="Basic covers 1 business and includes the service catalogue, client management, team management, calendar and public booking. Pro covers up to 3 businesses and adds finances and payments, team permissions and the loyalty programme.",
   q2="Do my clients need an account?", a2="No. They book through the business link without an account. Khrono also offers a client area to follow bookings and, on Pro, loyalty.",
   q3="Can I use it on my phone?", a3="Yes. Khrono runs in the browser and adapts to phone and desktop, with nothing to install.",
-  q4="How do I start the 7 free days?", a4="Click “Start free” and create the account with your name, e-mail and business name. No card. If you want to carry on after seven days, you pick a plan from the dashboard.",
+  q4="How do I start the 7 free days?", a4="Click “Start free” and create the account with your name, e-mail and business name. If you want to carry on after seven days, you pick a plan from the dashboard.",
   q5="I already have an account. Where do I sign in?", a5="Use “Sign in” at the top of the page. Your clients keep using your business booking link and the client area.",
   cta_h="Your time deserves a better calendar.", cta_p="Try Khrono and find more room to do what you do well.", cta_btn="Start free",
   ft_tag1="Appointment management.", ft_tag2="Organize your calendar and follow your appointments in one place.", ft_plat="Platform", ft_l0="Discover Khrono", ft_l6="Open my dashboard", ft_l5="Client area", ft_l4="Sign in", ft_dev="Development and contact", ft_dev_p="Developer contact", ft_by="Developed by",

@@ -14,19 +14,15 @@ section[id]{ scroll-margin-top:84px }
 /* segmentos como cartões (sem link) — mantém foto viva no hover */
 article.seg{ cursor:default } article.seg:hover .bg{ transform:scale(1.06) } article.seg:hover .in{ transform:none }
 
-/* começar: passos + formulário */
-.startGrid{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,4vw,72px); align-items:start }
-.steps .lead{ margin-top:12px; max-width:44ch }
-.steps ol{ list-style:none; margin-top:clamp(28px,3.4vw,44px); display:grid; gap:0 }
-.steps li{ display:grid; grid-template-columns:64px 1fr; gap:12px; padding:clamp(18px,2vw,26px) 0; border-top:1px solid var(--line2) }
-.steps li:last-child{ border-bottom:1px solid var(--line2) }
-.steps li b{ font-family:var(--display); font-weight:500; font-size:clamp(1.6rem,2.4vw,2.2rem); letter-spacing:-.04em; color:var(--acc); line-height:1 }
-.steps li h3{ font-size:1.15rem; letter-spacing:-.02em } .steps li p{ color:var(--mut); font-size:15px; margin-top:6px; max-width:40ch }
-.startCard{ position:sticky; top:96px; background:var(--paper); border:1px solid var(--acc); border-radius:var(--r-lg); padding:clamp(24px,3vw,40px); box-shadow:var(--shadow) }
-.startCard h3{ font-size:clamp(1.4rem,2vw,1.8rem); letter-spacing:-.03em } .startCard .sub{ color:var(--mut); font-size:14.5px; margin:8px 0 22px }
-.startCard .form{ background:none; border:0; padding:0; box-shadow:none }
-.startCard .btn.wide{ width:100%; justify-content:center; margin-top:6px }
-@media (max-width:900px){ .startGrid{ grid-template-columns:1fr } .startCard{ position:static } }
+/* começar: banda discreta com os três passos */
+.startSec{ padding-top:clamp(40px,5vw,64px); padding-bottom:clamp(40px,5vw,64px) }
+.startHead{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap }
+.startHead h2{ font-size:clamp(1.5rem,2.4vw,2.1rem); margin-top:6px }
+.steps3{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,32px); margin-top:clamp(22px,2.6vw,34px) }
+.steps3 li{ padding-top:16px; border-top:1px solid var(--line) }
+.steps3 b{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--acc); font-weight:500 }
+.steps3 h3{ font-size:1.05rem; letter-spacing:-.015em; margin-top:8px } .steps3 p{ color:var(--mut); font-size:14px; margin-top:6px; max-width:38ch; line-height:1.55 }
+@media (max-width:720px){ .steps3{ grid-template-columns:1fr; gap:14px } .startHead .btn{ width:100%; justify-content:center } }
 
 /* palco das abas: a altura é a da aba ativa (as outras ficam absolutas, só para o fade de saída) */
 .stage{ position:relative } .stage .view:not(.on){ position:absolute; left:0; top:0; width:100%; height:100%; overflow:hidden }
