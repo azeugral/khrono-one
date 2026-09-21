@@ -5,7 +5,7 @@ import io, os, re, shutil, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.normpath(os.path.join(HERE, "..", "base-lean"))
 BSRC = os.path.join(BASE, "src")
-APP  = "https://azeugral.github.io/khrono-front/cliente/"     # área do cliente real, mostrada dentro dos celulares
+APP  = "https://dev.khrono.tech/b/empresa-teste"     # página do cliente real (produto), mostrada dentro do celular
 
 def read(p):  return io.open(p, encoding="utf-8").read()
 def write(p, s):
@@ -36,7 +36,10 @@ T = {
   in_eye="Por dentro", in_h2="Simples para você. Fácil para seu cliente.", in_lead="Duas experiências conectadas: a organização do seu dia e o agendamento de quem vai chegar.",
   in_tab1="Sua operação", in_tab2="Seu painel", in_tab3="Seu cliente",
   in_cap1="Os horários e os atendimentos de cada profissional em uma mesma agenda — o novo agendamento entra sozinho, já confirmado.",
-  in_cap2="No Pro, vendas, agendamentos, comandas e ranking por profissional numa tela só.",
+  in_cap2="Valores recebidos, agendamentos, atendimentos concluídos, movimento por dia e ranking por profissional — numa tela só.",
+  pn_myacc="Minha conta", pn_m1="Visão geral", pn_m2="Empresas", pn_m3="Operação", pn_m4="Agenda", pn_m5="Financeiro", pn_m6="Assinaturas", pn_eyebrow="Administração da conta", pn_title="Visão geral", pn_help="Ajuda", pn_filter="Filtrar", pn_refresh="Atualizar",
+  pn_note="Comparação com 23/08 — 06/09 · apenas empresas com acesso a cada indicador.", pn_k1="Valores recebidos", pn_k1s="Pagamentos registrados no período", pn_k2="Agendamentos", pn_k2s="Por data do agendamento · exceto cancelados", pn_k3="Atendimentos concluídos", pn_k3s="Somente status concluído", pn_vs="vs. período anterior", pn_comp="empresas",
+  pn_t2="Atendimentos", pn_chart="Movimento por dia", pn_hint="Passe sobre as barras para consultar os valores.", pn_pros="Profissionais", pn_clients="Clientes", pn_rank="Ranking de atendimentos", pn_ranks="Profissionais ativos · somente atendimentos concluídos.",
   in_cap3="É o link que vai na bio. Pode tocar: é a página do cliente de verdade, rodando aqui dentro.",
   ag_title="Sua agenda", ag_date="Segunda-feira, 21 de setembro", ag_day="Dia", ag_week="Semana", ag_ok="Confirmado", ag_free="Horário livre", ag_new="Novo agendamento", ag_wait="Aguardando",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
@@ -76,7 +79,10 @@ T = {
   in_eye="Inside", in_h2="Simple for you. Easy for your client.", in_lead="Two connected experiences: the organization of your day and the booking of whoever is coming next.",
   in_tab1="Your operation", in_tab2="Your dashboard", in_tab3="Your client",
   in_cap1="Every professional's hours and appointments in one calendar — the new booking lands on its own, already confirmed.",
-  in_cap2="On Pro: sales, bookings, tabs and a ranking per professional on one screen.",
+  in_cap2="Payments received, bookings, completed appointments, daily movement and a ranking per professional — on one screen.",
+  pn_myacc="My account", pn_m1="Overview", pn_m2="Businesses", pn_m3="Operation", pn_m4="Calendar", pn_m5="Finances", pn_m6="Subscriptions", pn_eyebrow="Account administration", pn_title="Overview", pn_help="Help", pn_filter="Filter", pn_refresh="Refresh",
+  pn_note="Compared with 23/08 — 06/09 · only businesses with access to each indicator.", pn_k1="Payments received", pn_k1s="Payments recorded in the period", pn_k2="Bookings", pn_k2s="By booking date · excluding cancelled", pn_k3="Completed appointments", pn_k3s="Completed status only", pn_vs="vs. previous period", pn_comp="businesses",
+  pn_t2="Appointments", pn_chart="Daily movement", pn_hint="Hover the bars to see the values.", pn_pros="Professionals", pn_clients="Clients", pn_rank="Appointments ranking", pn_ranks="Active professionals · completed appointments only.",
   in_cap3="It's the link that goes in the bio. Go ahead and tap: it's the real client page, running right here.",
   ag_title="Your calendar", ag_date="Monday, 21 September", ag_day="Day", ag_week="Week", ag_ok="Confirmed", ag_free="Free slot", ag_new="New booking", ag_wait="Pending",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
@@ -113,13 +119,14 @@ plans  = read(os.path.join(BSRC, "partials", "plans.html"))
 tpl    = read(os.path.join(HERE, "src", "page.html"))
 layout = read(os.path.join(HERE, "src", "layout.html"))
 agenda = read(os.path.join(HERE, "src", "agenda.html"))
+painel = read(os.path.join(HERE, "src", "painel.html"))
 
 HOME = ""
 import time; STAMP = time.strftime("%Y%m%d%H%M")
 def stamp(html): return re.sub(r'(assets/(?:css|js)/[\w.-]+\.(?:css|js))"', lambda m: m.group(1) + "?v=" + STAMP + '"', html)
 def fill(s, lang):
     L = LANGS[lang]; t = T[lang]; s = s.replace("{{home}}", HOME)
-    s = s.replace("{{dash}}", dash).replace("{{plans}}", plans).replace("{{agenda}}", agenda).replace("{{mosaic}}", mosaic[lang])
+    s = s.replace("{{dash}}", dash).replace("{{plans}}", plans).replace("{{agenda}}", agenda).replace("{{painel}}", painel).replace("{{mosaic}}", mosaic[lang])
     for i, ic in enumerate(icons, 1): s = s.replace("{{ic%d}}" % i, ic)
     s = re.sub(r"\[\[t\.(\w+)\]\]", lambda m: t[m.group(1)], s)
     P = {"signup": HOME + "#comecar", "pricing": HOME + "#planos", "index": HOME + "#topo", "terms": L["pages"]["terms"], "privacy": L["pages"]["privacy"]}

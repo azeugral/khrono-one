@@ -29,6 +29,29 @@
     }
   }
 
+  /* ---------- painel: números que contam, barras que sobem, "atualizar" de tempos em tempos ---------- */
+  const pnl = $('.pnl');
+  if(pnl){
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const fmt = (v, el) => (el.dataset.prefix || '') + v.toLocaleString('pt-BR', { minimumFractionDigits:+(el.dataset.dec||0), maximumFractionDigits:+(el.dataset.dec||0) });
+    const count = (el, to, dur=1400) => { const from = parseFloat(el.dataset.cur || 0), t0 = performance.now(); const step = now => { const p = Math.min(1, (now - t0) / dur); const v = from + (to - from) * ease(p); el.textContent = fmt(+(el.dataset.dec ? v.toFixed(2) : Math.round(v)), el); if(p < 1) requestAnimationFrame(step); else el.dataset.cur = to; }; requestAnimationFrame(step); };
+    const start = ()=>{
+      pnl.classList.add('in'); setTimeout(()=> pnl.classList.add('settled'), 2200);
+      $$('.pv', pnl).forEach((el, i)=> setTimeout(()=> count(el, +el.dataset.to), 250 + i * 120));
+      if(reduce) return;
+      // a cada 9s o painel "atualiza": ícone gira, um dia recebe mais movimento, os números avançam um pouco
+      setInterval(()=>{
+        pnl.classList.remove('tick'); void pnl.offsetWidth; pnl.classList.add('tick');
+        const bars = $$('.pnbars i', pnl), b = bars[Math.floor(Math.random() * 5) + 9];
+        const v = Math.min(1, parseFloat(getComputedStyle(b).getPropertyValue('--v')) + .08); b.style.setProperty('--v', v.toFixed(2));
+        const [rec, ag, ok] = $$('.pv', pnl);
+        count(ag, +ag.dataset.cur + 1, 700); if(Math.random() > .4) count(ok, +ok.dataset.cur + 1, 700); count(rec, +(+rec.dataset.cur + 60 + Math.round(Math.random() * 3) * 20).toFixed(2), 900);
+      }, 9000);
+    };
+    if(reduce || !('IntersectionObserver' in window)){ pnl.classList.add('in', 'settled'); $$('.pv', pnl).forEach(el=>{ el.textContent = fmt(+el.dataset.to, el); el.dataset.cur = el.dataset.to; }); }
+    else { const io = new IntersectionObserver(es=>{ es.forEach(en=>{ if(!en.isIntersecting) return; start(); io.disconnect(); }); }, { threshold:.15 }); io.observe(pnl); }
+  }
+
   /* ---------- celulares: carregam a área do cliente real quando a aba abre ---------- */
   const live = $('.phones.live');
   if(live){
@@ -36,7 +59,7 @@
     const frames = $$('.scr', live);
     const fit = ()=> frames.forEach(scr=>{
       const f = $('iframe', scr); if(!f) return;
-      const s = scr.clientWidth / 390;
+      const s = scr.clientWidth / 390;   // a página do cliente é desenhada a 390px e escalada para a moldura
       f.style.setProperty('--s', s.toFixed(4)); f.style.setProperty('--ih', Math.ceil(scr.clientHeight / s) + 'px');
     });
     let loaded = false;
