@@ -1,0 +1,165 @@
+/* ============================================================
+   Khrono — polimento: movimento, profundidade e atmosfera
+   Carregado depois de site.css.
+   ============================================================ */
+
+html{ scroll-padding-top:84px }
+
+/* ---------- transição entre páginas (View Transitions) ---------- */
+@view-transition{ navigation:auto }
+::view-transition-old(root){ animation:vtOut .22s var(--ease) both }
+::view-transition-new(root){ animation:vtIn .42s var(--ease) both }
+@keyframes vtOut{ to{ opacity:0; transform:translateY(-8px) } }
+@keyframes vtIn{ from{ opacity:0; transform:translateY(12px) } }
+.hdr{ view-transition-name:hdr }
+::view-transition-old(hdr){ animation:vtFadeOut .18s var(--ease) both }
+::view-transition-new(hdr){ animation:vtFadeIn .28s var(--ease) both }
+@keyframes vtFadeOut{ to{ opacity:0 } }
+@keyframes vtFadeIn{ from{ opacity:0 } }
+/* troca de tema: só crossfade, sem deslocamento */
+html.theming::view-transition-old(root),html.theming::view-transition-old(hdr){ animation:vtFadeOut .32s var(--ease) both }
+html.theming::view-transition-new(root),html.theming::view-transition-new(hdr){ animation:vtFadeIn .32s var(--ease) both }
+html.theming::view-transition-group(*){ animation-duration:.32s }
+
+/* fallback para navegadores sem View Transitions entre documentos */
+html.js:not(.vt) main{ animation:pageIn .5s var(--ease) both }
+@keyframes pageIn{ from{ opacity:0; transform:translateY(12px) } }
+html.leaving main{ opacity:0; transform:translateY(-8px); transition:opacity .2s var(--ease), transform .2s var(--ease) }
+
+/* ---------- atmosfera: brilho, anéis e grão ---------- */
+.hero,.pageHead{ position:relative; overflow:hidden; isolation:isolate }
+.hero::before,.pageHead::before{
+  content:''; position:absolute; z-index:-1; pointer-events:none;
+  left:50%; top:-30%; width:min(1100px,120vw); height:90%; transform:translateX(-50%);
+  background:radial-gradient(50% 55% at 50% 45%, rgba(29,92,72,.13), transparent 72%);
+}
+.pageHead::before{ left:auto; right:-10%; top:-40%; width:60vw; transform:none; opacity:.8 }
+.hero::after,.pageHead::after{
+  content:''; position:absolute; z-index:-1; pointer-events:none; inset:0;
+  background:repeating-radial-gradient(circle at 88% 10%, transparent 0 46px, var(--ring) 46px 47px);
+  -webkit-mask-image:radial-gradient(60% 70% at 88% 10%, #000 20%, transparent 80%);
+  mask-image:radial-gradient(60% 70% at 88% 10%, #000 20%, transparent 80%);
+}
+body::after{
+  content:''; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:var(--grain-op); mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.cta{ position:relative; overflow:hidden; isolation:isolate }
+.cta::before{
+  content:''; position:absolute; z-index:-1; inset:auto -20% -60% -20%; height:120%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(29,92,72,.55), transparent 70%); filter:blur(10px);
+}
+.cta::after{
+  content:''; position:absolute; z-index:-1; inset:0;
+  background:repeating-radial-gradient(circle at 10% 110%, transparent 0 52px, var(--cta-ring) 52px 53px);
+}
+
+/* ---------- cabeçalho ao rolar ---------- */
+.hdr{ transition:box-shadow .3s var(--ease), background .3s var(--ease) }
+.hdr.scrolled{ box-shadow:0 10px 30px -22px rgba(27,26,23,.35); background:color-mix(in oklab, var(--bg) 94%, transparent) }
+.hdr .wrap{ transition:height .3s var(--ease) }
+.hdr.scrolled .wrap{ height:60px }
+
+/* ---------- botões e links com peso ---------- */
+.btn{
+  transition:background .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease),
+             transform .22s var(--ease), box-shadow .22s var(--ease);
+}
+.btn:hover{ transform:translateY(-1.5px); box-shadow:0 12px 26px -14px rgba(27,26,23,.5) }
+.btn.acc:hover{ box-shadow:0 14px 28px -12px rgba(29,92,72,.55) }
+.btn.line:hover,.btn.ghost:hover{ box-shadow:none }
+.btn:active{ transform:translateY(0) scale(.98); transition-duration:.08s }
+.btn svg{ transition:transform .22s var(--ease) }
+.btn:hover svg{ transform:translateX(2px) }
+.link{ position:relative }
+.link::after{
+  content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor;
+  transform:scaleX(0); transform-origin:right; transition:transform .28s var(--ease);
+}
+.link:hover::after{ transform:scaleX(1); transform-origin:left }
+.nav li.open > .menu{ animation:menuIn .22s var(--ease) }
+@keyframes menuIn{ from{ opacity:0; transform:translateY(-6px) scale(.98) } }
+.menu a{ transition:background .14s var(--ease), transform .14s var(--ease) }
+.menu a:hover{ transform:translateX(2px) }
+
+/* ---------- revelação na rolagem ---------- */
+html.js [data-reveal]{
+  opacity:0; transform:translateY(16px);
+  transition:opacity .75s var(--ease), transform .75s var(--ease);
+  transition-delay:calc(var(--i,0) * 70ms);
+}
+html.js [data-reveal].in{ opacity:1; transform:none }
+
+/* mockup do hero: eventos chegam depois do cartão */
+.shot .ev{ transition:opacity .5s var(--ease), transform .5s var(--ease); transition-delay:calc(.35s + var(--k,0) * 60ms) }
+html.js .shot:not(.in) .ev{ opacity:0; transform:translateY(6px) scale(.98) }
+
+/* cartões e visuais */
+.card,.post{ transition:border-color .22s var(--ease), transform .28s var(--ease), box-shadow .28s var(--ease) }
+.card:hover,.post:hover{ transform:translateY(-3px); box-shadow:0 22px 40px -32px rgba(27,26,23,.35) }
+.vis{ transition:transform .5s var(--ease), box-shadow .5s var(--ease) }
+.split:hover .vis{ transform:translateY(-3px) }
+.plan{ transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease) }
+.plan:hover{ transform:translateY(-3px) }
+.chips span{ transition:border-color .18s var(--ease), color .18s var(--ease), transform .18s var(--ease) }
+.chips span:hover{ border-color:var(--acc); color:var(--acc); transform:translateY(-1px) }
+
+/* conteúdo dos visuais entra depois do cartão */
+.stat .chart i{ transform-origin:bottom; transition:transform .9s var(--ease); transition-delay:calc(.2s + var(--k,0) * 55ms) }
+html.js [data-reveal]:not(.in) .stat .chart i{ transform:scaleY(0) }
+.flow .st{ transition:opacity .5s var(--ease), transform .5s var(--ease); transition-delay:calc(.15s + var(--k,0) * 90ms) }
+html.js [data-reveal]:not(.in) .flow .st{ opacity:0; transform:translateX(-8px) }
+.chat .m,.chat .auto{ transition:opacity .45s var(--ease), transform .45s var(--ease); transition-delay:calc(.15s + var(--k,0) * 140ms) }
+html.js [data-reveal]:not(.in) .chat .m,html.js [data-reveal]:not(.in) .chat .auto{ opacity:0; transform:translateY(8px) }
+.hub .n{ transition:opacity .5s var(--ease), transform .5s var(--ease); transition-delay:calc(.3s + var(--k,0) * 80ms) }
+html.js [data-reveal]:not(.in) .hub .n{ opacity:0; transform:scale(.9) }
+.hub .core{ transition:transform .6s var(--ease) }
+html.js [data-reveal]:not(.in) .hub .core{ transform:translate(-50%,-50%) scale(.8) }
+
+/* ---------- logos em faixa contínua ---------- */
+.logos{ display:block; overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent) }
+.logos .track{ display:flex; gap:56px; width:max-content; animation:marq 34s linear infinite; padding:2px 0 }
+.logos:hover .track{ animation-play-state:paused }
+.logos .track span{ flex:none }
+@keyframes marq{ to{ transform:translateX(-50%) } }
+
+/* ---------- FAQ com abertura animada ---------- */
+.faq details .wrapA{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .36s var(--ease) }
+.faq details.on .wrapA{ grid-template-rows:1fr }
+.faq details .wrapA > .a{ min-height:0; overflow:hidden }
+.faq summary i{ transition:background .3s var(--ease) }
+.faq summary i::after{ transition:opacity .25s var(--ease) }
+.faq details.closing summary i::after{ opacity:1 }
+.faq summary{ transition:color .18s var(--ease) }
+.faq summary:hover{ color:var(--acc) }
+
+/* ---------- alternância de preços ---------- */
+.toggle{ position:relative }
+.toggle button{ position:relative; z-index:1; transition:color .25s var(--ease); background:transparent !important }
+.toggle .knob{ position:absolute; top:4px; bottom:4px; left:0; border-radius:99px; background:var(--ink); transition:transform .32s var(--ease), width .32s var(--ease); z-index:0 }
+.plan .price b{ display:inline-block; transition:opacity .2s var(--ease), transform .2s var(--ease) }
+.plan .price b.swap{ opacity:0; transform:translateY(6px) }
+
+/* ---------- depoimentos "ver mais" ---------- */
+.q{ transition:opacity .5s var(--ease), transform .5s var(--ease) }
+.q.appear{ display:flex; opacity:0; transform:translateY(12px) }
+
+/* ---------- formulários ---------- */
+.inp{ transition:border-color .18s var(--ease), box-shadow .18s var(--ease) }
+.inp:focus{ box-shadow:0 0 0 4px var(--acc-soft) }
+.okbox{ animation:okIn .5s var(--ease) both }
+@keyframes okIn{ from{ opacity:0; transform:translateY(10px) } }
+.okbox .ring svg path{ stroke-dasharray:30; stroke-dashoffset:30; animation:draw .5s var(--ease) .25s forwards }
+@keyframes draw{ to{ stroke-dashoffset:0 } }
+
+/* ---------- números que contam ---------- */
+.numbers .n b,.trust .big{ font-variant-numeric:tabular-nums }
+
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){ animation:none }
+  html.js [data-reveal]{ opacity:1; transform:none; transition:none }
+  html.js .shot:not(.in) .ev,html.js [data-reveal]:not(.in) .stat .chart i,html.js [data-reveal]:not(.in) .flow .st,
+  html.js [data-reveal]:not(.in) .chat .m,html.js [data-reveal]:not(.in) .chat .auto,html.js [data-reveal]:not(.in) .hub .n{ opacity:1; transform:none }
+  .logos .track{ animation:none; flex-wrap:wrap; justify-content:center; width:auto }
+  .btn:hover{ transform:none }
+}

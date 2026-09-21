@@ -1,0 +1,132 @@
+<section class="hero center hero2 heroOne">
+  <div class="wrap">
+    <span class="eyebrow dot">[[t.hero_eye]]</span>
+    <h1>[[t.hero_h1a]] <br><i>[[t.hero_h1b]]</i></h1>
+    <p class="lead">[[t.hero_lead]]</p>
+    <div class="btns center">
+      <a class="btn acc lg" href="#comecar">[[t.hero_cta1]]</a>
+      <a class="btn line lg" href="#funcionalidades">[[t.hero_cta2]]</a>
+    </div>
+    <p class="fine">[[t.hero_note]]</p>
+  </div>
+  {{mosaic}}
+</section>
+
+<section class="segsSec" id="segmentos">
+  <div class="wrap wide">
+    <div class="secHead row2">
+      <div><span class="eyebrow">[[t.seg_eye]]</span><h2>[[t.seg_h2]]</h2></div>
+      <p class="lead">[[t.seg_lead]]</p>
+    </div>
+    <div class="segs">
+      <article class="seg"><i class="bg" style="background-image:url({{base}}assets/img/seg-barbearias.jpg)"></i><div class="in"><h3>[[t.seg1_h]]<i>.</i></h3><p>[[t.seg1_p]]</p></div></article>
+      <article class="seg"><i class="bg" style="background-image:url({{base}}assets/img/seg-saloes.jpg)"></i><div class="in"><h3>[[t.seg2_h]]<i>.</i></h3><p>[[t.seg2_p]]</p></div></article>
+      <article class="seg"><i class="bg" style="background-image:url({{base}}assets/img/seg-clinicas.jpg)"></i><div class="in"><h3>[[t.seg3_h]]<i>.</i></h3><p>[[t.seg3_p]]</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="alt essSec" id="funcionalidades">
+  <div class="wrap wide">
+    <div class="secHead row2">
+      <div><span class="eyebrow">[[t.ess_eye]]</span><h2>[[t.ess_h2]]</h2></div>
+      <p class="lead">[[t.ess_lead]]</p>
+    </div>
+    <div class="essGrid">
+      <article class="ess">{{ic1}}<span class="num">01</span><h3>[[t.ess1_h]]</h3><p>[[t.ess1_p]]</p></article>
+      <article class="ess">{{ic2}}<span class="num">02</span><h3>[[t.ess2_h]]</h3><p>[[t.ess2_p]]</p></article>
+      <article class="ess">{{ic3}}<span class="num">03</span><h3>[[t.ess3_h]]</h3><p>[[t.ess3_p]]</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="showcase" id="por-dentro">
+  <div class="wrap wide">
+    <div class="secHead row2">
+      <div><span class="eyebrow">[[t.in_eye]]</span><h2>[[t.in_h2]]</h2></div>
+      <p class="lead">[[t.in_lead]]</p>
+    </div>
+    <div class="views" data-tabs>
+      <div class="vtabs" role="tablist">
+        <button role="tab" aria-selected="true" data-view="agenda">[[t.in_tab1]]</button>
+        <button role="tab" aria-selected="false" data-view="painel">[[t.in_tab2]]</button>
+        <button role="tab" aria-selected="false" data-view="cliente">[[t.in_tab3]]</button>
+        <i class="ind"></i>
+      </div>
+      <div class="stage">
+        <div class="view on" data-view="agenda">
+          {{agenda}}
+          <p class="cap">[[t.in_cap1]]</p>
+        </div>
+        <div class="view" data-view="painel">
+          {{dash}}
+          <p class="cap">[[t.in_cap2]]</p>
+        </div>
+        <div class="view" data-view="cliente">
+          <div class="phones live" data-app="{{app}}">
+            <div class="frame a"><span class="bar"><b>9:41</b><i></i><b>●●●</b></span><div class="scr"><img src="{{base}}assets/img/app-inicio.jpg" alt="" loading="lazy"><iframe title="[[t.in_tab3]]" data-src="" tabindex="-1"></iframe></div></div>
+            <div class="frame b"><span class="bar"><b>9:41</b><i></i><b>●●●</b></span><div class="scr"><img src="{{base}}assets/img/app-agendar.jpg" alt="" loading="lazy"><iframe title="[[t.in_tab3]]" data-src="agendar.html" tabindex="-1"></iframe></div></div>
+          </div>
+          <p class="cap">[[t.in_cap3]]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt startSec" id="comecar">
+  <div class="wrap wide">
+    <div class="startGrid">
+      <div class="steps">
+        <span class="eyebrow">[[t.st_eye]]</span>
+        <h2>[[t.st_h2]]</h2>
+        <p class="lead">[[t.st_lead]]</p>
+        <ol>
+          <li><b>01</b><div><h3>[[t.st1_h]]</h3><p>[[t.st1_p]]</p></div></li>
+          <li><b>02</b><div><h3>[[t.st2_h]]</h3><p>[[t.st2_p]]</p></div></li>
+          <li><b>03</b><div><h3>[[t.st3_h]]</h3><p>[[t.st3_p]]</p></div></li>
+        </ol>
+      </div>
+      <div class="startCard">
+        <h3>[[t.f_h]]</h3>
+        <p class="sub">[[t.f_p]]</p>
+        <form class="form" data-demo="conta">
+          <div class="fld"><label for="nome">[[t.f_nome]]</label><input class="inp" id="nome" name="nome" required placeholder="[[t.f_nome_ph]]" autocomplete="name"><div class="fmsg">[[t.f_nome_err]]</div></div>
+          <div class="fld"><label for="negocio">[[t.f_neg]]</label><input class="inp" id="negocio" name="negocio" required placeholder="[[t.f_neg_ph]]" autocomplete="organization"><div class="fmsg">[[t.f_neg_err]]</div></div>
+          <div class="fld"><label for="email">[[t.f_email]]</label><input class="inp" id="email" name="email" type="email" required placeholder="[[t.f_email_ph]]" autocomplete="email"><div class="fmsg">[[t.f_email_err]]</div></div>
+          <div class="fld"><label for="seg">[[t.f_seg]]</label><select class="inp" id="seg" name="seg"><option>[[t.f_seg1]]</option><option>[[t.f_seg2]]</option><option>[[t.f_seg3]]</option><option>[[t.f_seg4]]</option></select></div>
+          <button class="btn acc wide lg" type="submit">[[t.f_btn]]</button>
+          <p class="fine">[[t.f_fine]]</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="priceSec" id="planos">
+  <div class="wrap wide">
+    <div class="secHead center">
+      <span class="eyebrow">[[t.pl_eye]]</span>
+      <h2>[[t.pl_h2]]</h2>
+      <p class="lead center">[[t.pl_lead]]</p>
+    </div>
+    {{plans}}
+  </div>
+</section>
+
+<section class="alt faqSec" id="duvidas">
+  <div class="wrap wide">
+    <div class="faqGrid">
+      <div class="secHead"><span class="eyebrow">[[t.fq_eye]]</span><h2>[[t.fq_h2]]</h2></div>
+      <div class="faqs">
+        <details open><summary>[[t.q1]]<i></i></summary><div class="a">[[t.a1]]</div></details>
+        <details><summary>[[t.q2]]<i></i></summary><div class="a">[[t.a2]]</div></details>
+        <details><summary>[[t.q3]]<i></i></summary><div class="a">[[t.a3]]</div></details>
+        <details><summary>[[t.q4]]<i></i></summary><div class="a">[[t.a4]]</div></details>
+        <details><summary>[[t.q5]]<i></i></summary><div class="a">[[t.a5]]</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight"><div class="wrap wide"><div class="cta"><h2>[[t.cta_h]]</h2><p class="lead">[[t.cta_p]]</p><div class="btns center"><a class="btn lg" href="#comecar">[[t.cta_btn]]</a></div></div></div></section>
