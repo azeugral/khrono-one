@@ -303,3 +303,11 @@ html.js .essGrid:not(.in) .ess{ opacity:0; transform:translateY(14px) }
 .prose td{ padding:11px 12px; border-bottom:1px solid var(--line2); color:var(--mut); vertical-align:top; line-height:1.5 } .prose td:last-child{ white-space:nowrap; color:var(--ink) }
 .prose ul{ padding-left:20px; margin-bottom:16px } .prose li{ margin-bottom:8px }
 @media (max-width:560px){ .prose td:last-child{ white-space:normal } }
+
+/* aceite dos termos no cadastro */
+.fld.chk label{ display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:14px; color:var(--mut); line-height:1.5 }
+.fld.chk input{ appearance:none; width:18px; height:18px; flex:none; margin-top:2px; border:1px solid var(--line); border-radius:5px; background:var(--paper); display:grid; place-items:center; transition:border-color .2s var(--ease), background .2s var(--ease) }
+.fld.chk input::after{ content:''; width:10px; height:6px; border:2px solid var(--acc-on); border-top:0; border-right:0; transform:rotate(-45deg) translate(1px,-1px) scale(.6); opacity:0; transition:opacity .15s, transform .2s var(--ease) }
+.fld.chk input:checked{ background:var(--acc); border-color:var(--acc) } .fld.chk input:checked::after{ opacity:1; transform:rotate(-45deg) translate(1px,-1px) scale(1) }
+.fld.chk input:focus-visible{ outline:2px solid var(--acc); outline-offset:2px } .fld.chk.bad input{ border-color:var(--bad) }
+.fld.chk .link{ font-size:inherit }

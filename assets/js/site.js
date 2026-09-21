@@ -153,6 +153,8 @@
       e.preventDefault();
       let ok = true;
       $$('.fld', f).forEach(fld=>{
+        const acc = $('[data-accept]', fld);
+        if(acc){ const bad = !acc.checked; fld.classList.toggle('bad', bad); if(bad) ok = false; return; }
         const inp = $('.inp', fld);
         if(!inp) return;
         const need = inp.hasAttribute('required');
