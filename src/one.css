@@ -50,15 +50,16 @@ article.seg{ cursor:default } article.seg:hover .bg{ transform:scale(1.06) } art
 .agt{ display:flex; align-items:center; gap:10px; font-size:14px } .agt svg{ width:18px; height:18px; fill:none; stroke:var(--acc); stroke-width:1.8; stroke-linecap:round } .agt b{ font-weight:500 } .agt span{ color:var(--mut); font-size:13px }
 .agseg{ display:inline-flex; padding:3px; border:1px solid var(--line2); border-radius:99px; background:var(--bg); font-size:12px }
 .agseg span{ padding:6px 12px; border-radius:99px; color:var(--mut) } .agseg span.on{ background:var(--paper); color:var(--ink); border:1px solid var(--line); box-shadow:0 6px 18px -12px rgba(0,0,0,.5) }
-.agg{ position:relative; display:grid; grid-template-columns:56px repeat(3,minmax(0,1fr)); padding:0 clamp(10px,1.4vw,18px) clamp(14px,1.8vw,22px) 0 }
-.agtimes{ display:grid; grid-template-rows:var(--top) repeat(4,var(--h)) } .agtimes span{ font-family:var(--mono); font-size:10.5px; color:var(--dim); text-align:right; padding-right:10px; transform:translateY(-7px) }
+.agg{ position:relative; display:grid; grid-template-columns:56px repeat(3,minmax(0,1fr)); padding:0 clamp(10px,1.4vw,18px) clamp(10px,1.4vw,16px) 0 }
+.agtimes{ display:grid; grid-template-rows:var(--top) repeat(3,var(--h)) auto } .agtimes span{ font-family:var(--mono); font-size:10.5px; color:var(--dim); text-align:right; padding-right:10px; transform:translateY(-7px) }
 .agcol{ border-left:1px solid var(--line2); min-width:0 }
 .agp{ height:var(--top); display:flex; align-items:center; gap:8px; padding:0 12px; font-size:13.5px; font-weight:500; border-bottom:1px solid var(--line2) }
 .agp i{ width:24px; height:24px; border-radius:50%; background:var(--acc-soft); color:var(--acc); font-style:normal; font-size:11px; font-weight:600; display:grid; place-items:center; flex:none }
-.agbody{ position:relative; height:calc(var(--h) * 3.5); margin:0 6px; background-image:linear-gradient(to bottom, var(--line2) 0, var(--line2) 1px, transparent 1px); background-size:100% var(--h) }
+.agbody{ position:relative; height:calc(var(--h) * 3 + 14px); margin:0 6px; background-image:linear-gradient(to bottom, var(--line2) 0, var(--line2) 1px, transparent 1px); background-size:100% var(--h) }
 .agc,.agfree{ position:absolute; left:4px; right:4px; top:calc(var(--s) / 60 * var(--h) + 3px); height:calc(var(--d) / 60 * var(--h) - 6px); border-radius:10px }
-.agc{ padding:7px 9px 6px; display:flex; flex-direction:column; gap:1px; font-size:12px; line-height:1.25; overflow:hidden; border-left:3px solid var(--acc); background:color-mix(in oklab, var(--acc) 13%, var(--paper)) }
+.agc{ padding:7px 9px 6px; display:flex; flex-direction:column; gap:0; font-size:12px; line-height:1.2; overflow:hidden; border-left:3px solid var(--acc); background:color-mix(in oklab, var(--acc) 13%, var(--paper)) }
 .agc.c2{ border-left-color:#B8893A; background:color-mix(in oklab, #C9A04A 16%, var(--paper)) } .agc.c3{ border-left-color:#7E76C4; background:color-mix(in oklab, #8C85CF 16%, var(--paper)) } .agc.c4{ border-left-color:#3F8F9E; background:color-mix(in oklab, #4FA3B2 15%, var(--paper)) }
+.agc > *{ flex:none; min-width:0 }
 .agc b{ font-family:var(--mono); font-size:9.5px; font-weight:500; color:var(--dim); letter-spacing:.02em } .agc span{ font-weight:500; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .agc small{ color:var(--mut); font-size:11px }
 .agc em{ font-style:normal; display:flex; align-items:center; gap:4px; font-size:10.5px; color:var(--acc); margin-top:auto } .agc em svg{ width:11px; height:11px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round }
 .agfree{ border:1px dashed var(--line); display:grid; place-items:center; font-size:11px; color:var(--dim) }
@@ -76,13 +77,21 @@ html.js .agd:not(.in) .agc:not(.new), html.js .agd:not(.in) .agfree{ opacity:0; 
 @keyframes agWait{ 0%,44%{ opacity:1 } 48%,100%{ opacity:0 } }
 @keyframes agOk{ 0%,47%{ opacity:0; transform:translateY(4px) } 52%,100%{ opacity:1; transform:none } }
 @keyframes agSlot{ 0%,8%{ opacity:1 } 14%,94%{ opacity:0 } 99%,100%{ opacity:1 } }
-/* linha do agora, desce devagar */
-.agnow{ position:absolute; left:56px; right:clamp(10px,1.4vw,18px); top:calc(var(--top) + var(--h) * 1.2); height:1px; background:var(--acc); opacity:.8; pointer-events:none; animation:agNow 90s linear infinite }
-.agnow i{ position:absolute; left:-4px; top:-4px; width:9px; height:9px; border-radius:50%; background:var(--acc); box-shadow:0 0 0 4px var(--acc-soft) }
-@keyframes agNow{ to{ transform:translateY(calc(var(--h) * .8)) } }
 @media (max-width:640px){
-  .agd{ --h:66px; --top:44px } .agg{ grid-template-columns:44px repeat(3,minmax(0,1fr)) } .agtimes span{ padding-right:6px; font-size:10px } .agnow{ left:44px }
+  .agd{ --h:66px; --top:44px } .agg{ grid-template-columns:44px repeat(3,minmax(0,1fr)) } .agtimes span{ padding-right:6px; font-size:10px } 
   .agseg{ display:none } .agt span{ display:none } .agc{ padding:6px 7px 5px; font-size:11px } .agc small{ display:none } .agc:not(.new) em{ display:none } .agc.new .tag{ display:none } .agc b{ font-size:9px } .agp{ font-size:12.5px; padding:0 8px }
 }
 @media (max-width:420px){ .agg{ grid-template-columns:40px 1fr 1fr } .agcol:nth-child(4){ display:none } .agc.new .tag{ display:none } }
-@media (prefers-reduced-motion:reduce){ .agc.new{ opacity:1; transform:none } .agc.new,.agc.new .tag,.agc.new em.w,.agc.new em.o,.agfree.slot,.agnow,.eyebrow.dot::before{ animation:none } .agc.new em.o{ opacity:1 } .agc.new em.w{ display:none } .agfree.slot{ opacity:0 } }
+@media (prefers-reduced-motion:reduce){ .agc.new{ opacity:1; transform:none } .agc.new,.agc.new .tag,.agc.new em.w,.agc.new em.o,.agfree.slot,.eyebrow.dot::before{ animation:none } .agc.new em.o{ opacity:1 } .agc.new em.w{ display:none } .agfree.slot{ opacity:0 } }
+
+/* rodapé em três colunas */
+.ftr.foot3{ padding:clamp(44px,5.5vw,72px) 0 26px; border-top:1px solid var(--line2) }
+.ftr.foot3 .cols{ display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:clamp(24px,4vw,64px); align-items:start }
+.ftr.foot3 .brand p{ color:var(--mut); font-size:14.5px; max-width:36ch; margin-top:10px; line-height:1.55 } .ftr.foot3 .brand p b{ color:var(--ink); font-weight:500 } .ftr.foot3 .brand .logo{ margin-bottom:8px } .ftr.foot3 .brand .logo .hz{ height:44px }
+.ftr.foot3 .col{ display:flex; flex-direction:column; gap:12px } .ftr.foot3 .col .eyebrow{ margin-bottom:6px }
+.ftr.foot3 .col a{ font-size:14.5px; color:var(--mut); width:max-content; transition:color .16s var(--ease) } .ftr.foot3 .col a:hover{ color:var(--ink) }
+.ftr.foot3 .col p{ color:var(--ink); font-size:14.5px } .ftr.foot3 .col .mail{ color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:1px } .ftr.foot3 .col .mail:hover{ border-color:var(--acc) }
+.ftr.foot3 .tools{ display:flex; gap:8px; align-items:center; margin-top:6px }
+.ftr.foot3 .base{ margin-top:clamp(28px,3.4vw,44px); padding-top:20px; border-top:1px solid var(--line2); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:13px; color:var(--dim) } .ftr.foot3 .base b{ font-weight:500; color:var(--mut) }
+@media (max-width:820px){ .ftr.foot3 .cols{ grid-template-columns:1fr 1fr } .ftr.foot3 .brand{ grid-column:1 / -1 } }
+@media (max-width:480px){ .ftr.foot3 .cols{ grid-template-columns:1fr } }

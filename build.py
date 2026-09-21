@@ -54,7 +54,7 @@ T = {
   q4="Como começo os 7 dias grátis?", a4="Clique em “Começar grátis”, crie a conta com nome, e-mail e o nome do negócio. Não pede cartão. Se quiser continuar depois dos sete dias, você escolhe o plano pelo painel.",
   q5="Já tenho uma conta. Onde entro?", a5="Em “Entrar”, no topo da página. Seus clientes continuam usando o link de agendamento do seu negócio e a área do cliente.",
   cta_h="Seu tempo merece uma agenda melhor.", cta_p="Experimente o Khrono e encontre mais espaço para fazer o que você faz bem.", cta_btn="Começar grátis",
-  ft_tag="Agenda online, lembrete por e-mail e caixa fechado para barbearias, salões e clínicas.", ft_plat="Plataforma", ft_l1="Segmentos", ft_l2="Funcionalidades", ft_l3="Planos", ft_l4="Entrar", ft_l5="Área do cliente", ft_contact="Contato", ft_made="Feito em São Paulo",
+  ft_tag1="Gestão de agendamentos.", ft_tag2="Organize sua agenda e acompanhe seus atendimentos em um só lugar.", ft_plat="Plataforma", ft_l0="Conhecer o Khrono", ft_l6="Acessar meu painel", ft_l5="Área do cliente", ft_l4="Entrar", ft_dev="Desenvolvimento e contato", ft_dev_p="Contato da desenvolvedora", ft_by="Desenvolvido por",
   ok_lbl="Incluído", no_lbl="Não incluído",
  ),
  "en": dict(
@@ -94,7 +94,7 @@ T = {
   q4="How do I start the 7 free days?", a4="Click “Start free” and create the account with your name, e-mail and business name. No card. If you want to carry on after seven days, you pick a plan from the dashboard.",
   q5="I already have an account. Where do I sign in?", a5="Use “Sign in” at the top of the page. Your clients keep using your business booking link and the client area.",
   cta_h="Your time deserves a better calendar.", cta_p="Try Khrono and find more room to do what you do well.", cta_btn="Start free",
-  ft_tag="Online booking, e-mail reminders and a closed till for barbershops, salons and clinics.", ft_plat="Platform", ft_l1="Segments", ft_l2="Features", ft_l3="Plans", ft_l4="Sign in", ft_l5="Client area", ft_contact="Contact", ft_made="Made in São Paulo",
+  ft_tag1="Appointment management.", ft_tag2="Organize your calendar and follow your appointments in one place.", ft_plat="Platform", ft_l0="Discover Khrono", ft_l6="Open my dashboard", ft_l5="Client area", ft_l4="Sign in", ft_dev="Development and contact", ft_dev_p="Developer contact", ft_by="Developed by",
   ok_lbl="Included", no_lbl="Not included",
  ),
 }
