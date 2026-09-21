@@ -295,3 +295,9 @@ html.js .essGrid:not(.in) .ess{ opacity:0; transform:translateY(14px) }
 @media (prefers-reduced-motion:reduce){
   .cmp .hd > *, .cmp .rows li, .card.cycle .rw, .mosaic .tile, .essGrid .ess, .tier .extra > span, .faqs details .wrapA, .faqs details .wrapA > .a{ transition:none !important }
 }
+
+/* texto legal: tabela e listas */
+.prose table{ width:100%; border-collapse:collapse; font-size:15px; margin:8px 0 24px } .prose th{ text-align:left; font-weight:500; padding:10px 12px; border-bottom:1px solid var(--line); font-size:13px; letter-spacing:.02em; color:var(--dim) }
+.prose td{ padding:11px 12px; border-bottom:1px solid var(--line2); color:var(--mut); vertical-align:top; line-height:1.5 } .prose td:last-child{ white-space:nowrap; color:var(--ink) }
+.prose ul{ padding-left:20px; margin-bottom:16px } .prose li{ margin-bottom:8px }
+@media (max-width:560px){ .prose td:last-child{ white-space:normal } }

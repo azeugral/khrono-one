@@ -91,3 +91,4 @@ html.js .agd:not(.in) .agc:not(.new), html.js .agd:not(.in) .agfree{ opacity:0; 
 .ftr.foot3 .base{ margin-top:clamp(28px,3.4vw,44px); padding-top:20px; border-top:1px solid var(--line2); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:13px; color:var(--dim) } .ftr.foot3 .base b{ font-weight:500; color:var(--mut) }
 @media (max-width:820px){ .ftr.foot3 .cols{ grid-template-columns:1fr 1fr } .ftr.foot3 .brand{ grid-column:1 / -1 } }
 @media (max-width:480px){ .ftr.foot3 .cols{ grid-template-columns:1fr } }
+.ftr.foot3 .legal{ display:flex; gap:14px; margin-top:4px } .ftr.foot3 .legal a{ font-size:13px; color:var(--dim) }

@@ -34,12 +34,12 @@
 <body>
 <header class="hdr">
   <div class="wrap wide">
-    <a class="logo" href="#topo" aria-label="{{marca}}"><img class="hz l" src="{{base}}assets/img/brand/horizontal-light.svg" alt="{{marca}}" width="1328" height="387"><img class="hz d" src="{{base}}assets/img/brand/horizontal-dark.svg" alt="{{marca}}" width="1328" height="387"></a>
+    <a class="logo" href="{{home}}#topo" aria-label="{{marca}}"><img class="hz l" src="{{base}}assets/img/brand/horizontal-light.svg" alt="{{marca}}" width="1328" height="387"><img class="hz d" src="{{base}}assets/img/brand/horizontal-dark.svg" alt="{{marca}}" width="1328" height="387"></a>
     <ul class="nav spy">
-      <li><a href="#segmentos">[[t.nav_seg]]</a></li>
-      <li><a href="#funcionalidades">[[t.nav_feat]]</a></li>
-      <li><a href="#por-dentro">[[t.nav_in]]</a></li>
-      <li><a href="#planos">[[t.nav_plans]]</a></li>
+      <li><a href="{{home}}#segmentos">[[t.nav_seg]]</a></li>
+      <li><a href="{{home}}#funcionalidades">[[t.nav_feat]]</a></li>
+      <li><a href="{{home}}#por-dentro">[[t.nav_in]]</a></li>
+      <li><a href="{{home}}#planos">[[t.nav_plans]]</a></li>
     </ul>
     <div class="right">
       <a class="lang" href="{{alt}}" hreflang="{{alt_lang}}" title="[[lang.title]]">[[lang.label]]</a>
@@ -51,10 +51,10 @@
   </div>
 </header>
 <nav class="mnav" aria-label="[[nav.menu]]">
-  <a href="#segmentos">[[t.nav_seg]]</a>
-  <a href="#funcionalidades">[[t.nav_feat]]</a>
-  <a href="#por-dentro">[[t.nav_in]]</a>
-  <a href="#planos">[[t.nav_plans]]</a>
+  <a href="{{home}}#segmentos">[[t.nav_seg]]</a>
+  <a href="{{home}}#funcionalidades">[[t.nav_feat]]</a>
+  <a href="{{home}}#por-dentro">[[t.nav_in]]</a>
+  <a href="{{home}}#planos">[[t.nav_plans]]</a>
   <a href="[[t.url_signin]]">[[t.nav_signin]]</a>
   <div class="tools">
     <a class="lang" href="{{alt}}" hreflang="{{alt_lang}}">[[lang.label]]</a>
@@ -62,7 +62,7 @@
   </div>
   <div class="btns">
     <a class="btn acc" href="[[t.url_start]]">[[t.nav_start]]</a>
-    <a class="btn line" href="#planos">[[t.nav_plans]]</a>
+    <a class="btn line" href="{{home}}#planos">[[t.nav_plans]]</a>
   </div>
 </nav>
 <main id="topo">
@@ -72,13 +72,13 @@
   <div class="wrap wide">
     <div class="cols">
       <div class="brand">
-        <a class="logo" href="#topo"><img class="hz l" src="{{base}}assets/img/brand/horizontal-light.svg" alt="{{marca}}" width="1328" height="387"><img class="hz d" src="{{base}}assets/img/brand/horizontal-dark.svg" alt="{{marca}}" width="1328" height="387"></a>
+        <a class="logo" href="{{home}}#topo"><img class="hz l" src="{{base}}assets/img/brand/horizontal-light.svg" alt="{{marca}}" width="1328" height="387"><img class="hz d" src="{{base}}assets/img/brand/horizontal-dark.svg" alt="{{marca}}" width="1328" height="387"></a>
         <p><b>[[t.ft_tag1]]</b></p>
         <p>[[t.ft_tag2]]</p>
       </div>
       <div class="col">
         <span class="eyebrow">[[t.ft_plat]]</span>
-        <a href="#funcionalidades">[[t.ft_l0]]</a>
+        <a href="{{home}}#funcionalidades">[[t.ft_l0]]</a>
         <a href="[[t.url_signin]]">[[t.ft_l6]]</a>
         <a href="{{app}}" target="_blank" rel="noopener">[[t.ft_l5]]</a>
         <a href="[[t.url_signin]]">[[t.ft_l4]]</a>
@@ -87,6 +87,7 @@
         <span class="eyebrow">[[t.ft_dev]]</span>
         <p>[[t.ft_dev_p]]</p>
         <a class="mail" href="mailto:contato@{{dominio}}">contato@{{dominio}}</a>
+        <div class="legal"><a href="[[p:terms]]">[[t.ft_terms]]</a><a href="[[p:privacy]]">[[t.ft_privacy]]</a></div>
         <div class="tools">
           <a class="lang" href="{{alt}}" hreflang="{{alt_lang}}">[[lang.label]]</a>
           <button class="tbtn" aria-label="[[theme.label]]"><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg><svg class="moon" viewBox="0 0 24 24"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg></button>

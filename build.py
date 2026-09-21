@@ -56,7 +56,7 @@ T = {
   q4="Como começo os 7 dias grátis?", a4="Clique em “Começar grátis” e crie a conta com nome, e-mail e o nome do negócio. Se quiser continuar depois dos sete dias, você escolhe o plano pelo painel.",
   q5="Já tenho uma conta. Onde entro?", a5="Em “Entrar”, no topo da página. Seus clientes continuam usando o link de agendamento do seu negócio e a área do cliente.",
   cta_h="Seu tempo merece uma agenda melhor.", cta_p="Experimente o Khrono e encontre mais espaço para fazer o que você faz bem.", cta_btn="Começar grátis",
-  ft_tag1="Gestão de agendamentos.", ft_tag2="Organize sua agenda e acompanhe seus atendimentos em um só lugar.", ft_plat="Plataforma", ft_l0="Conhecer o Khrono", ft_l6="Acessar meu painel", ft_l5="Área do cliente", ft_l4="Entrar", ft_dev="Desenvolvimento e contato", ft_dev_p="Contato da desenvolvedora", ft_by="Desenvolvido por",
+  ft_tag1="Gestão de agendamentos.", ft_tag2="Organize sua agenda e acompanhe seus atendimentos em um só lugar.", ft_plat="Plataforma", ft_l0="Conhecer o Khrono", ft_l6="Acessar meu painel", ft_l5="Área do cliente", ft_l4="Entrar", ft_dev="Desenvolvimento e contato", ft_dev_p="Contato da desenvolvedora", ft_by="Desenvolvido por", ft_terms="Termos de uso", ft_privacy="Privacidade",
   ok_lbl="Incluído", no_lbl="Não incluído",
  ),
  "en": dict(
@@ -96,7 +96,7 @@ T = {
   q4="How do I start the 7 free days?", a4="Click “Start free” and create the account with your name, e-mail and business name. If you want to carry on after seven days, you pick a plan from the dashboard.",
   q5="I already have an account. Where do I sign in?", a5="Use “Sign in” at the top of the page. Your clients keep using your business booking link and the client area.",
   cta_h="Your time deserves a better calendar.", cta_p="Try Khrono and find more room to do what you do well.", cta_btn="Start free",
-  ft_tag1="Appointment management.", ft_tag2="Organize your calendar and follow your appointments in one place.", ft_plat="Platform", ft_l0="Discover Khrono", ft_l6="Open my dashboard", ft_l5="Client area", ft_l4="Sign in", ft_dev="Development and contact", ft_dev_p="Developer contact", ft_by="Developed by",
+  ft_tag1="Appointment management.", ft_tag2="Organize your calendar and follow your appointments in one place.", ft_plat="Platform", ft_l0="Discover Khrono", ft_l6="Open my dashboard", ft_l5="Client area", ft_l4="Sign in", ft_dev="Development and contact", ft_dev_p="Developer contact", ft_by="Developed by", ft_terms="Terms of use", ft_privacy="Privacy",
   ok_lbl="Included", no_lbl="Not included",
  ),
 }
@@ -114,12 +114,14 @@ tpl    = read(os.path.join(HERE, "src", "page.html"))
 layout = read(os.path.join(HERE, "src", "layout.html"))
 agenda = read(os.path.join(HERE, "src", "agenda.html"))
 
+HOME = ""
 def fill(s, lang):
-    L = LANGS[lang]; t = T[lang]
+    L = LANGS[lang]; t = T[lang]; s = s.replace("{{home}}", HOME)
     s = s.replace("{{dash}}", dash).replace("{{plans}}", plans).replace("{{agenda}}", agenda).replace("{{mosaic}}", mosaic[lang])
     for i, ic in enumerate(icons, 1): s = s.replace("{{ic%d}}" % i, ic)
     s = re.sub(r"\[\[t\.(\w+)\]\]", lambda m: t[m.group(1)], s)
-    s = re.sub(r"\[\[p:([\w-]+)\]\]", lambda m: {"signup": "#comecar", "pricing": "#planos", "index": "#topo"}.get(m.group(1), "#"), s)
+    P = {"signup": HOME + "#comecar", "pricing": HOME + "#planos", "index": HOME + "#topo", "terms": L["pages"]["terms"], "privacy": L["pages"]["privacy"]}
+    s = re.sub(r"\[\[p:([\w-]+)\]\]", lambda m: P.get(m.group(1), "#"), s)
     s = re.sub(r"\[\[([\w.]+)\]\]", lambda m: L["s"][m.group(1)], s)
     s = s.replace("{{base}}", L["base"]).replace("{{marca}}", MARCA).replace("{{dominio}}", DOMINIO).replace("{{ok}}", OK).replace("{{app}}", APP)
     return s
@@ -136,6 +138,22 @@ for lang in LANGS:
     html = html.replace('href="criar-conta.html"', 'href="#comecar"').replace('href="precos.html"', 'href="#planos"').replace('href="sign-up.html"', 'href="#comecar"').replace('href="pricing.html"', 'href="#planos"')
     assert "[[" not in html and "{{" not in html, re.findall(r"(\[\[[^\]]+\]\]|\{\{[^}]+\}\})", html)[:5]
     write(os.path.join(HERE, L["dir"], "index.html"), html)
+
+# ---------- páginas legais (mesmo texto do base-lean), com o header desta one-page ----------
+HOME = "index.html"
+for lang in LANGS:
+    L = LANGS[lang]
+    for key in ("terms", "privacy"):
+        raw = read(os.path.join(BSRC, "pages", lang, L["pages"][key]))
+        m = re.match(r"title:[ \t]*([^\n]*)\ndesc:[ \t]*([^\n]*)\nalt:[ \t]*([^\n]*)\n\n(.*)", raw, re.S)
+        body = m.group(4).replace('href="index.html"', 'href="index.html"').replace('href="precos.html"', 'href="index.html#planos"').replace('href="pricing.html"', 'href="index.html#planos"')
+        html = (layout.replace("{{title}}", m.group(1)).replace("{{desc}}", m.group(2)).replace("{{main}}", body)
+                      .replace("{{lang}}", "pt-BR" if lang == "pt" else "en").replace("{{alt_lang}}", "en" if lang == "pt" else "pt-BR")
+                      .replace("{{alt}}", m.group(3)))
+        html = fill(html, lang)
+        assert "[[" not in html and "{{" not in html, "tokens sobrando em " + L["pages"][key]
+        write(os.path.join(HERE, L["dir"], L["pages"][key]), html)
+HOME = ""
 
 # ---------- assets: os do base-lean + os desta página ----------
 dst = os.path.join(HERE, "assets")
