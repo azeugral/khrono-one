@@ -178,7 +178,7 @@ for sub in ("css", "js", "img"):
 for fn in ("one.css",): shutil.copy2(os.path.join(HERE, "src", fn), os.path.join(dst, "css", fn))
 for fn in ("one.js",):  shutil.copy2(os.path.join(HERE, "src", fn), os.path.join(dst, "js", fn))
 # página do cliente (estática, própria)
-for sub in ("cliente", "relatorios"):
+for sub in ("cliente",):
     d = os.path.join(HERE, sub); os.makedirs(d, exist_ok=True)
     base = os.path.join(HERE, "src", sub)
     for root, _, files in os.walk(base):
