@@ -26,6 +26,13 @@ Protótipo do painel do proprietário (`src/painel/`), pensado para o back-end i
 
 Filtros: unidade, período (hoje/7/30/365) e profissional. Tema claro é o padrão.
 
+## Relatórios do mês (`relatorios/`)
+Nove modelos de relatório prontos para impressão/PDF (A4), no formato que o contador e o proprietário esperam: cabeçalho com razão social, CNPJ, unidade, competência e data de emissão; agrupamento; subtotais por grupo; total geral; rodapé; campos de assinatura onde faz sentido.
+
+`profissional` (faturamento por profissional, item a item) · `comissoes` (base, % e valor a pagar) · `recebimentos` (por forma, com taxa e líquido) · `caixa` (entradas por dia e forma) · `servicos` (quantidade, ticket e participação) · `clientes` (novos, retorno e 10 maiores) · `faltas` (horários perdidos e receita não realizada) · `assinaturas` (recorrência e sessões a usar) · `resumo` (receita − comissões − taxas − fixos = resultado).
+
+Filtros: competência (12 meses) e unidade. Botões: **Imprimir / PDF** (usa o diálogo do navegador, CSS `@page A4`) e **CSV** da tabela em tela. Link direto por relatório: `relatorios/#comissoes`. Dados fictícios em `src/relatorios/app.js` (função `gerar`) — trocar por dados da API mantém o layout.
+
 ## Integração
 - Formulário "Comece agora" (`form[data-demo="conta"]`, campos `nome`, `negocio`, `email`, `seg`) é interceptado em `assets/js/site.js` (bloco "formulários") — trocar pelo POST real.
 - "Entrar" aponta para `https://khrono.tech/workspace` (constante `url_signin` em `build.py`).
