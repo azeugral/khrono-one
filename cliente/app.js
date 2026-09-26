@@ -2,18 +2,48 @@
    Boas-vindas → 1 Serviços → 2 Membro da equipe → 3 Dia e horário → 4 Revisão → Tudo certo. Tudo em memória, sem back-end. */
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const B = {
-    nome:'Studio Exemplo', ini:'SE', tel:'+55 11 99999-0000', capa:'../assets/img/hero-clinica.jpg',
-    tagline:'Um tempo para você. Seu próximo atendimento começa aqui.',
-    politica:'Cancelamentos e remarcações devem ser feitos com pelo menos 12 horas de antecedência. Atrasos acima de 10 minutos podem reduzir o tempo do atendimento.',
-    servicos:[
-      { id:'s1', nome:'Corte feminino', desc:'Lavagem, corte e finalização', min:45, max:60, preco:80 },
-      { id:'s2', nome:'Escova modelada', desc:'Escova com finalização a seu gosto', min:30, max:45, preco:60 },
-      { id:'s3', nome:'Limpeza de pele', desc:'Higienização, extração e máscara calmante', min:60, max:75, preco:150 },
-      { id:'s4', nome:'Design de sobrancelhas', desc:'Modelagem com pinça e acabamento', min:20, max:30, preco:45 },
-    ],
-    equipe:[ { id:'p1', nome:'Ana Ribeiro', ini:'AR' }, { id:'p2', nome:'Bruno Costa', ini:'BC' }, { id:'p3', nome:'Camila Duarte', ini:'CD' } ],
+  /* nicho define capa, ícone e cor de destaque — nada disso vem de upload, é fixo por tipo de negócio */
+  const NICHOS = {
+    barbearia: { rotulo:'Barbearia', capa:'../assets/img/hero-barbearia.jpg', tinta:'#1f4a3a', frase:'Cadeira reservada no seu nome. Escolha o horário e apareça.',
+      icone:'<svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><path d="M8 7.6L20 18M8 16.4L20 6"/></svg>' },
+    salao: { rotulo:'Salão de beleza', capa:'../assets/img/hero-salao.jpg', tinta:'#4a2f3f', frase:'Um tempo só seu. Escolha o serviço e o horário que combina com o seu dia.',
+      icone:'<svg viewBox="0 0 24 24"><path d="M7 21V10a5 5 0 0 1 10 0v11M9 21v-6h6v6M12 5V3"/><circle cx="12" cy="7" r="1.2"/></svg>' },
+    clinica: { rotulo:'Clínica de estética', capa:'../assets/img/hero-clinica.jpg', tinta:'#1d4f52', frase:'Cuidado com hora marcada. Escolha o procedimento e reserve o seu horário.',
+      icone:'<svg viewBox="0 0 24 24"><path d="M12 21c-4-3-7-6-7-10a7 7 0 0 1 14 0c0 4-3 7-7 10z"/><path d="M12 21V8M12 12c-2 0-3.4-1.2-3.8-3M12 15c2 0 3.4-1.2 3.8-3"/></svg>' },
   };
+  const qs = new URLSearchParams(location.search);
+  const NICHO = NICHOS[qs.get('nicho')] ? qs.get('nicho') : 'barbearia';
+  const N = NICHOS[NICHO];
+  const B = {
+    nome:{ barbearia:'Barbearia Dan', salao:'Studio Aurora', clinica:'Clínica Lumière' }[NICHO],
+    ini:{ barbearia:'BD', salao:'SA', clinica:'CL' }[NICHO],
+    tel:'(19) 98442-8872', telLink:'+5519984428872',
+    endereco:{ barbearia:'Centro, Campinas', salao:'Pinheiros, São Paulo', clinica:'Moema, São Paulo' }[NICHO],
+    abre:'09:00', fecha:'20:00', nota:'4,9', avaliacoes:287,
+    capa:N.capa, icone:N.icone, tagline:N.frase, rotulo:N.rotulo,
+    politica:'Cancelamentos e remarcações devem ser feitos com pelo menos 12 horas de antecedência. Atrasos acima de 10 minutos podem reduzir o tempo do atendimento.',
+    servicos:{
+      barbearia:[ { id:'s1', nome:'Corte masculino', desc:'Máquina, tesoura e finalização', min:30, max:45, preco:55 },
+        { id:'s2', nome:'Corte + barba', desc:'O combo completo, com toalha quente', min:50, max:70, preco:85 },
+        { id:'s3', nome:'Barba modelada', desc:'Navalha, toalha quente e hidratação', min:25, max:35, preco:45 },
+        { id:'s4', nome:'Pezinho', desc:'Acabamento entre um corte e outro', min:15, max:20, preco:25 } ],
+      salao:[ { id:'s1', nome:'Corte feminino', desc:'Lavagem, corte e finalização', min:45, max:60, preco:80 },
+        { id:'s2', nome:'Escova modelada', desc:'Escova com finalização a seu gosto', min:30, max:45, preco:60 },
+        { id:'s3', nome:'Coloração', desc:'Cor, tonalização e tratamento', min:90, max:120, preco:180 },
+        { id:'s4', nome:'Design de sobrancelhas', desc:'Modelagem com pinça e acabamento', min:20, max:30, preco:45 } ],
+      clinica:[ { id:'s1', nome:'Limpeza de pele', desc:'Higienização, extração e máscara', min:60, max:75, preco:150 },
+        { id:'s2', nome:'Peeling de diamante', desc:'Renovação celular com ponteira', min:45, max:60, preco:220 },
+        { id:'s3', nome:'Drenagem linfática', desc:'Manobras para retenção e inchaço', min:50, max:60, preco:190 },
+        { id:'s4', nome:'Massagem relaxante', desc:'Pressão média, óleos quentes', min:50, max:60, preco:160 } ],
+    }[NICHO],
+    equipe:{
+      barbearia:[ { id:'p1', nome:'Dan Oliveira', ini:'DO' }, { id:'p2', nome:'Rafa Souza', ini:'RS' }, { id:'p3', nome:'Léo Prado', ini:'LP' } ],
+      salao:[ { id:'p1', nome:'Ana Ribeiro', ini:'AR' }, { id:'p2', nome:'Bruno Costa', ini:'BC' }, { id:'p3', nome:'Camila Duarte', ini:'CD' } ],
+      clinica:[ { id:'p1', nome:'Marina Lopes', ini:'ML' }, { id:'p2', nome:'Helena Gil', ini:'HG' }, { id:'p3', nome:'Paula Nunes', ini:'PN' } ],
+    }[NICHO],
+  };
+  document.documentElement.dataset.nicho = NICHO;
+  document.title = B.nome + ' — Agendamento online · Khrono';
   const S = { tela:'wel', passo:1, svc:[], pro:null, mes:null, dia:null, hora:null, nome:'', email:'', ddi:'+55', tel:'', obs:'', com:false, aceite:false };
   const brl = v => 'R$ ' + v.toFixed(2).replace('.', ',');
   const DS = ['DOM','SEG','TER','QUA','QUI','SEX','SÁB'], DL = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
@@ -24,6 +54,11 @@
     cal:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>', calok:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>',
     user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>', mail:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
     gift:'<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8c-2-3-6-3-6-1s3 1 6 1zm0 0c2-3 6-3 6-1s-3 1-6 1z"/></svg>',
+    phone:'<svg viewBox="0 0 24 24"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3A2 2 0 0 1 18 18.4 15.6 15.6 0 0 1 5.6 6 2 2 0 0 1 6.6 3z"/></svg>',
+    pin:'<svg viewBox="0 0 24 24"><path d="M12 21c-4-3.6-7-6.8-7-10a7 7 0 0 1 14 0c0 3.2-3 6.4-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg>',
+    star:'<svg viewBox="0 0 24 24"><path d="M12 3.4l2.5 5.2 5.6.7-4.1 3.9 1 5.6L12 16.2 6.9 18.8l1-5.6L3.9 9.3l5.6-.7z"/></svg>',
+    zap:'<svg viewBox="0 0 24 24"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg>',
+    shield:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9.2 12.2l2 2 3.6-3.8"/></svg>',
     left:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>', right:'<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>', login:'<svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg>',
   };
   const svc = id => B.servicos.find(s=>s.id===id), pro = id => B.equipe.find(p=>p.id===id);
@@ -42,11 +77,40 @@
   const bar = (ok, label='Continuar', icon=I.right)=> `<div class="bar"><button class="btn back" data-back>${I.left} Voltar</button><button class="btn acc" id="next" ${ok?'':'disabled'}>${label} ${icon}</button></div>`;
 
   const T = {
-    wel: ()=> `<section class="hero"><img src="${B.capa}" alt=""><div><span class="eyebrow">Agendamento online</span><h1>${B.nome}</h1><p>${B.tagline}</p><p class="tel">${B.tel}</p></div></section>
-      <section class="wel fade"><span class="eyebrow">Boas-vindas</span><h2>Como deseja continuar?</h2><p class="sub">Escolha seu serviço e reserve um horário.</p>
-      <div class="gift">${I.gift}<span>Na sua conta, acompanhe agendamentos e benefícios de fidelidade.</span></div>
-      <button class="btn acc" data-go="google">${I.login} Entrar com Google</button><button class="btn" data-go="start">Continuar sem login ${I.right}</button></section>
-      <div class="powered"><span>Agenda por</span><img src="../assets/img/brand/horizontal-light.svg" alt="Khrono"></div>`,
+    wel: ()=>{
+      const agora = new Date(), h = agora.getHours() + agora.getMinutes()/60;
+      const aberto = h >= +B.abre.slice(0,2) && h < +B.fecha.slice(0,2) && agora.getDay() !== 0;
+      const saud = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+      return `<header class="cover">
+        <img class="bg" src="${B.capa}" alt="" fetchpriority="high">
+        <span class="veil"></span><span class="grain"></span><span class="ring"></span>
+        <div class="cIn">
+          <span class="mark">${B.icone}</span>
+          <span class="kicker">${B.rotulo} · Agendamento online</span>
+          <h1>${B.nome}</h1>
+          <p class="tag">${saud}. ${B.tagline}</p>
+          <div class="chips">
+            <span class="chip st ${aberto ? 'on' : 'off'}"><i></i>${aberto ? `Aberto agora · até ${B.fecha}` : `Fechado · abre ${B.abre}`}</span>
+            <a class="chip" href="tel:${B.telLink}">${I.phone}${B.tel}</a>
+            <span class="chip">${I.pin}${B.endereco}</span>
+            <span class="chip">${I.star}${B.nota} <small>(${B.avaliacoes})</small></span>
+          </div>
+        </div>
+      </header>
+      <section class="welcome fade">
+        <div class="wHead"><span class="eyebrow">Boas-vindas</span><h2>Vamos marcar seu horário?</h2><p class="sub">Escolha o serviço, o profissional e o horário. Leva menos de um minuto.</p></div>
+        <button class="btn acc lg" data-go="start">Escolher horário ${I.right}</button>
+        <ul class="perks">
+          <li>${I.zap}<span><b>Sem cadastro</b>você só informa nome e contato no fim</span></li>
+          <li>${I.shield}<span><b>Confirmação na hora</b>com lembrete antes do atendimento</span></li>
+          <li>${I.gift}<span><b>Fidelidade</b>entre na conta e acompanhe seus pontos</span></li>
+        </ul>
+        <div class="sep2"><span>já é cliente?</span></div>
+        <button class="btn ghost" data-go="google">${I.login} Entrar com Google</button>
+        <p class="fine2">Ao continuar você aceita os <a href="https://azeugral.github.io/khrono-front/cliente/termos.html" target="_blank" rel="noopener">Termos de agendamento</a> de ${B.nome}.</p>
+      </section>
+      <div class="powered"><span>Agenda por</span><img src="../assets/img/brand/horizontal-light.svg" alt="Khrono"></div>`;
+    },
     1: ()=> `${head()}<div class="wrap fade"><span class="lbl">Etapa 1 de 4</span><h2 class="q">Quais serviços você deseja?</h2><div class="list">${B.servicos.map(s=>`<button class="opt ${S.svc.includes(s.id)?'on':''}" data-svc="${s.id}"><span class="t"><b>${s.nome}</b><span>${s.desc}</span><small>${I.clock}${s.min} a ${s.max} min</small><em>${brl(s.preco)}</em></span><span class="ck sq">${I.check}</span></button>`).join('')}</div></div>${bar(S.svc.length>0)}`,
     2: ()=> `${head()}<div class="wrap fade"><span class="lbl">Etapa 2 de 4</span><h2 class="q">Quem vai atender você?</h2><div class="list">${B.equipe.map(p=>`<button class="opt ${S.pro===p.id?'on':''}" data-pro="${p.id}"><span class="row"><span class="av">${p.ini}</span><span class="t"><b>${p.nome}</b></span></span><span class="ck">${I.check}</span></button>`).join('')}</div></div>${bar(!!S.pro)}`,
     3: ()=>{
@@ -83,7 +147,7 @@
       <div class="powered"><span>Agenda por</span><img src="../assets/img/brand/horizontal-light.svg" alt="Khrono"></div>`,
   };
   const app = $('#app');
-  const paint = ()=>{ app.innerHTML = (S.tela === 'wel' ? T.wel : S.tela === 'ok' ? T.ok : T[S.passo])(); scrollTo({ top:0, behavior:'instant' }); };
+  const paint = ()=>{ app.innerHTML = (S.tela === 'wel' ? T.wel : S.tela === 'ok' ? T.ok : T[S.passo])(); document.body.classList.toggle('welcome-on', S.tela === 'wel'); scrollTo({ top:0, behavior:'instant' }); };
   const can = ()=> [null, S.svc.length>0, !!S.pro, !!S.dia && !!S.hora, S.nome.trim().length>1 && S.tel.replace(/\D/g,'').length>=10 && S.aceite][S.passo];
   const refresh = ()=>{ const n = $('#next'); if(n) n.disabled = !can(); };
 
