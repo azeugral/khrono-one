@@ -39,7 +39,7 @@ T = {
   in_cap2="Valores recebidos, agendamentos, atendimentos concluídos, movimento por dia e ranking por profissional — numa tela só.",
   pn_myacc="Minha conta", pn_m1="Visão geral", pn_m2="Empresas", pn_m3="Operação", pn_m4="Agenda", pn_m5="Financeiro", pn_m6="Assinaturas", pn_eyebrow="Administração da conta", pn_title="Visão geral", pn_help="Ajuda", pn_filter="Filtrar", pn_refresh="Atualizar",
   pn_note="Comparação com 23/08 — 06/09 · apenas empresas com acesso a cada indicador.", pn_k1="Valores recebidos", pn_k1s="Pagamentos registrados no período", pn_k2="Agendamentos", pn_k2s="Por data do agendamento · exceto cancelados", pn_k3="Atendimentos concluídos", pn_k3s="Somente status concluído", pn_vs="vs. período anterior", pn_comp="empresas",
-  pn_t2="Atendimentos", pn_chart="Movimento por dia", pn_hint="Passe sobre as barras para consultar os valores.", pn_pros="Profissionais", pn_clients="Clientes", pn_rank="Ranking de atendimentos", pn_ranks="Profissionais ativos · somente atendimentos concluídos.",
+  pn_t2="Atendimentos", pn_chart="Movimento por dia", pn_hint="Passe sobre as barras para consultar os valores.", pn_pros="Profissionais", pn_clients="Clientes", pn_rank="Ranking de atendimentos", pn_ranks="Profissionais ativos · somente atendimentos concluídos.", pn_open="Abrir painel de demonstração →",
   in_cap3="É o link que vai na bio. Pode tocar: é a página do cliente funcionando aqui dentro, com dados de demonstração.",
   ag_title="Sua agenda", ag_date="Segunda-feira, 21 de setembro", ag_day="Dia", ag_week="Semana", ag_ok="Confirmado", ag_free="Horário livre", ag_new="Novo agendamento", ag_wait="Aguardando",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
@@ -82,7 +82,7 @@ T = {
   in_cap2="Payments received, bookings, completed appointments, daily movement and a ranking per professional — on one screen.",
   pn_myacc="My account", pn_m1="Overview", pn_m2="Businesses", pn_m3="Operation", pn_m4="Calendar", pn_m5="Finances", pn_m6="Subscriptions", pn_eyebrow="Account administration", pn_title="Overview", pn_help="Help", pn_filter="Filter", pn_refresh="Refresh",
   pn_note="Compared with 23/08 — 06/09 · only businesses with access to each indicator.", pn_k1="Payments received", pn_k1s="Payments recorded in the period", pn_k2="Bookings", pn_k2s="By booking date · excluding cancelled", pn_k3="Completed appointments", pn_k3s="Completed status only", pn_vs="vs. previous period", pn_comp="businesses",
-  pn_t2="Appointments", pn_chart="Daily movement", pn_hint="Hover the bars to see the values.", pn_pros="Professionals", pn_clients="Clients", pn_rank="Appointments ranking", pn_ranks="Active professionals · completed appointments only.",
+  pn_t2="Appointments", pn_chart="Daily movement", pn_hint="Hover the bars to see the values.", pn_pros="Professionals", pn_clients="Clients", pn_rank="Appointments ranking", pn_ranks="Active professionals · completed appointments only.", pn_open="Open the demo dashboard →",
   in_cap3="It's the link that goes in the bio. Go ahead and tap: it's the working client page, right here, with demo data.",
   ag_title="Your calendar", ag_date="Monday, 21 September", ag_day="Day", ag_week="Week", ag_ok="Confirmed", ag_free="Free slot", ag_new="New booking", ag_wait="Pending",
   ag_p1="Ana", ag_p2="Bruno", ag_p3="Carla",
@@ -178,6 +178,7 @@ for sub in ("css", "js", "img"):
 for fn in ("one.css",): shutil.copy2(os.path.join(HERE, "src", fn), os.path.join(dst, "css", fn))
 for fn in ("one.js",):  shutil.copy2(os.path.join(HERE, "src", fn), os.path.join(dst, "js", fn))
 # página do cliente (estática, própria)
-cl = os.path.join(HERE, "cliente"); os.makedirs(cl, exist_ok=True)
-for fn in os.listdir(os.path.join(HERE, "src", "cliente")): shutil.copy2(os.path.join(HERE, "src", "cliente", fn), os.path.join(cl, fn))
+for sub in ("cliente", "painel"):
+    d = os.path.join(HERE, sub); os.makedirs(d, exist_ok=True)
+    for fn in os.listdir(os.path.join(HERE, "src", sub)): shutil.copy2(os.path.join(HERE, "src", sub, fn), os.path.join(d, fn))
 print("ok — index.html e en/index.html gerados")
